@@ -5,6 +5,8 @@ import (
 	"encoding/hex"
 	"log"
 	"os"
+
+	"github.com/gdamore/tcell"
 )
 
 type Page struct {
@@ -14,10 +16,11 @@ type Page struct {
 	Size           int
 }
 type LessHex_Context struct {
-	Pages       []Page
-	File_names  []string
-	Active_page int
-	Draw_Width  int
+	Pages         []Page
+	File_names    []string
+	Active_page   int
+	Draw_Width    int
+	Default_style tcell.Style
 }
 
 func (self *LessHex_Context) Load_files(file_names []string) {
@@ -43,5 +46,6 @@ func (self *LessHex_Context) Load_files(file_names []string) {
 		file.Close()
 		temp_buffer = nil
 		self.Draw_Width = 40
+		self.Default_style = tcell.StyleDefault
 	}
 }
